@@ -12,12 +12,14 @@ public class WinVolume : MonoBehaviour {
     public float timeLimit = 60f;
 
     private bool countDown = true;
+    ScriptAnalytics analytic;
 
 	// Use this for initialization
 	void Awake ()
     {
         victoryText.SetActive(false);
         outOfTimeText.SetActive(false);
+        analytic = GameObject.Find("Analytic").GetComponent<ScriptAnalytics>();
 	}
 
     void Update()
@@ -37,6 +39,10 @@ public class WinVolume : MonoBehaviour {
         }
     }
 	
+    void MarkEndTime()
+    {
+
+    }
 
 	void OnTriggerEnter(Collider other)
     {
@@ -47,5 +53,16 @@ public class WinVolume : MonoBehaviour {
 
         other.attachedRigidbody.isKinematic = true;
         countDown = false;
+
+        //Save our progress.
+        if (GameObject.Find("Analytic"))
+        {
+            ScriptAnalytics analytic = GameObject.Find("Analytic").GetComponent<ScriptAnalytics>();
+            analytic.SetLevelComplete(Application.loadedLevelName);
+        }
+        else
+        {
+            Debug.Log("No Progress Saved. Start game from Main Menu Scene!");
+        }
     }
 }
