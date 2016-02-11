@@ -17,7 +17,6 @@ public class MonkeyBall : MonoBehaviour {
 	void Awake()
 	{
         Input.gyro.enabled = true;
-        Debug.Log(SystemInfo.supportsGyroscope);
 	}
 
 	// Update is called once per frame
