@@ -8,6 +8,11 @@ public class ScriptChangeScene : MonoBehaviour {
         Application.LoadLevel("MainMenu");
     }
 
+    public void _HowToPlay()
+    {
+        Application.LoadLevel("HowToPlay");
+    }
+
     public void _Store()
     {
         Application.LoadLevel("Store");

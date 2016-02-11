@@ -6,9 +6,9 @@ public class ScriptAddBanana : MonoBehaviour {
     int bananas = 0;
     public Text bananaCount;
 
-	public void IncreaseBanana()
+	public void IncreaseBanana(int pAmount)
     {
-        bananas++;
+        bananas += pAmount;
         bananaCount.text = bananas.ToString();
     }
 

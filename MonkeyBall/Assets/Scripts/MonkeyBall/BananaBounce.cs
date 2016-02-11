@@ -13,6 +13,7 @@ public class BananaBounce : MonoBehaviour {
 
     public int health = 3;
     public float divider = 2f;
+    public int worth = 1;
 
     GameObject panelBanana;
 
@@ -40,7 +41,7 @@ public class BananaBounce : MonoBehaviour {
 
         if(health <= 0)
         {
-            panelBanana.GetComponent<ScriptAddBanana>().IncreaseBanana();
+            panelBanana.GetComponent<ScriptAddBanana>().IncreaseBanana(worth);
             Destroy(gameObject);
         }
     }
