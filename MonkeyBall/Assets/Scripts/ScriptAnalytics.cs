@@ -7,8 +7,7 @@ public class ScriptAnalytics : MonoBehaviour {
     private static bool created = false;
     // Use this for initialization
 
-    public float startTime;
-    public float endTime;
+    public int currentTimeAmount;
 
 	void Awake ()
     {
@@ -49,15 +48,31 @@ public class ScriptAnalytics : MonoBehaviour {
 	void OnLevelWasLoaded()
     {
         Debug.Log(Application.loadedLevelName);
-        startTime = Time.deltaTime;
     }
 
-    public void SetEndTime()
+    public void LevelTime(float pTime)
     {
-        endTime = Time.deltaTime;
-        //Then calcluate time on level.
-        float totalTime = endTime - startTime;
-        Debug.Log(totalTime);
+        string lvlName = Application.loadedLevelName;
+
+        int timesPlayed = PlayerPrefs.GetInt(lvlName + "timesPlayed");
+        PlayerPrefs.SetInt(lvlName + "timesPlayed", timesPlayed + 1);
+
+        float totalTime = PlayerPrefs.GetFloat(lvlName + "totaledTime");
+        PlayerPrefs.SetFloat(lvlName + "totaledTime", totalTime + pTime);
+        if(timesPlayed > 1)
+            PlayerPrefs.SetFloat(lvlName + "averageTime", totalTime / timesPlayed);
+        
+        float fastestTime = 0;
+        fastestTime = PlayerPrefs.GetFloat(lvlName + "fastestTime");
+        if(fastestTime == 0)
+        {
+            PlayerPrefs.SetFloat(lvlName + "fastestTime", pTime);
+        }
+        else if(pTime < fastestTime)
+        {
+            PlayerPrefs.SetFloat(lvlName + "fastestTime", pTime);
+        }
+
     }
 
     /// <summary>

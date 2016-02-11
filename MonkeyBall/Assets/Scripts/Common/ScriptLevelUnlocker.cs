@@ -48,5 +48,17 @@ public class ScriptLevelUnlocker : MonoBehaviour {
                 dictLevels[lvlName].interactable = true;
             }
         }
-	}
+
+        //Populate Times and # of plays.
+        foreach(string lvlName in dictLevels.Keys)
+        {
+            dictLevels[lvlName].transform.FindChild("TextAvgTime").GetComponent<Text>().text =
+                "Average: " + PlayerPrefs.GetFloat(lvlName + "averageTime").ToString();
+            dictLevels[lvlName].transform.FindChild("TextFastest").GetComponent<Text>().text =
+                "Fastest: " + PlayerPrefs.GetFloat(lvlName + "fastestTime").ToString();
+            dictLevels[lvlName].transform.FindChild("TextCompleted").GetComponent<Text>().text =
+                "Completed: (" + PlayerPrefs.GetInt(lvlName + "timesPlayed").ToString() + ") times.";
+
+        }
+    }
 }

@@ -10,6 +10,7 @@ public class WinVolume : MonoBehaviour {
 
     public Text timer;
     public float timeLimit = 60f;
+    public float totalTime = 0;
 
     private bool countDown = true;
     ScriptAnalytics analytic;
@@ -33,11 +34,13 @@ public class WinVolume : MonoBehaviour {
         if (countDown)
         {
             timeLimit -= Time.deltaTime;
+            totalTime += Time.deltaTime;
             timer.text = timeLimit.ToString("0.00");
         }
 
         if(timeLimit <= 0f)
         {
+            //MarkEndTime(); //Didn't want to record failed attempt times.
             outOfTimeText.SetActive(true);
             timer.gameObject.SetActive(false);
             monkeyBall.GetComponent<Collider>().attachedRigidbody.isKinematic = true;
@@ -45,11 +48,14 @@ public class WinVolume : MonoBehaviour {
         }
     }
 	
+    /// <summary>
+    /// Tell the analytics script to enter the end time.
+    /// </summary>
     void MarkEndTime()
     {
         if(analytic != null)
         {
-            analytic.SetEndTime();
+            analytic.LevelTime(totalTime);
         }
     }
 
@@ -57,6 +63,7 @@ public class WinVolume : MonoBehaviour {
     {
         if (countDown)
         {
+            MarkEndTime();
             victoryText.SetActive(true);
         }
 
