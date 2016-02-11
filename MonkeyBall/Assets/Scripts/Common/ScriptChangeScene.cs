@@ -48,6 +48,30 @@ public class ScriptChangeScene : MonoBehaviour {
         Application.Quit();
     }
 
+    public void _RestartLevel()
+    {
+        switch (Application.loadedLevelName)
+        {
+            case "LevelOne":
+                Application.LoadLevel("LevelOne");
+                break;
+            case "LevelTwo":
+                Application.LoadLevel("LevelTwo");
+                break;
+            case "LevelThree":
+                Application.LoadLevel("LevelThree");
+                break;
+            case "LevelFour":
+                Application.LoadLevel("LevelFour");
+                break;
+            case "LevelFive":
+                Application.LoadLevel("LevelFive");
+                break;
+
+        }
+
+    }
+
     public void _NextLevel()
     {
         switch (Application.loadedLevelName)

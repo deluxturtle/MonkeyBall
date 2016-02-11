@@ -3,8 +3,7 @@ using System.Collections;
 
 public class ScriptAnalytics : MonoBehaviour {
 
-    //for completion    0 = incompleted lvl
-    //                  1 = completed lvl
+    
     private static bool created = false;
     // Use this for initialization
 
@@ -35,10 +34,12 @@ public class ScriptAnalytics : MonoBehaviour {
             PlayerPrefs.SetInt("LevelFive", 0);
 
             Debug.Log("First Time Playing!");
+            PlayerPrefs.SetString("PlayedBefore", "yes");
         }
         else
         {
             Debug.Log("You've played before! Yay.");
+
         }
     }
 	
@@ -49,6 +50,14 @@ public class ScriptAnalytics : MonoBehaviour {
     {
         Debug.Log(Application.loadedLevelName);
         startTime = Time.deltaTime;
+    }
+
+    public void SetEndTime()
+    {
+        endTime = Time.deltaTime;
+        //Then calcluate time on level.
+        float totalTime = endTime - startTime;
+        Debug.Log(totalTime);
     }
 
     /// <summary>

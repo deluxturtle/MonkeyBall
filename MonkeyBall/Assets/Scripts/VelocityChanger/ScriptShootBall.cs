@@ -9,7 +9,7 @@ public class ScriptShootBall : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
     {
         other.GetComponent<Rigidbody>().velocity = direction.normalized * force;
-
+        other.GetComponent<Rigidbody>().AddTorque(Vector3.forward);
 
     }
 }

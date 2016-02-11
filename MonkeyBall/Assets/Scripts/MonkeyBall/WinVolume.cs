@@ -19,7 +19,13 @@ public class WinVolume : MonoBehaviour {
     {
         victoryText.SetActive(false);
         outOfTimeText.SetActive(false);
-        analytic = GameObject.Find("Analytic").GetComponent<ScriptAnalytics>();
+        if(GameObject.Find("Analytic"))
+            analytic = GameObject.Find("Analytic").GetComponent<ScriptAnalytics>();
+        else
+        {
+            Debug.Log("Analytics Disabled. (Please Start Game from Main Menu.");
+            analytic = null;
+        }
 	}
 
     void Update()
@@ -41,7 +47,10 @@ public class WinVolume : MonoBehaviour {
 	
     void MarkEndTime()
     {
-
+        if(analytic != null)
+        {
+            analytic.SetEndTime();
+        }
     }
 
 	void OnTriggerEnter(Collider other)
@@ -55,9 +64,8 @@ public class WinVolume : MonoBehaviour {
         countDown = false;
 
         //Save our progress.
-        if (GameObject.Find("Analytic"))
+        if (analytic != null)
         {
-            ScriptAnalytics analytic = GameObject.Find("Analytic").GetComponent<ScriptAnalytics>();
             analytic.SetLevelComplete(Application.loadedLevelName);
         }
         else
