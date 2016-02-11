@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class ScriptAddBanana : MonoBehaviour {
 
@@ -11,5 +10,10 @@ public class ScriptAddBanana : MonoBehaviour {
     {
         bananas++;
         bananaCount.text = bananas.ToString();
+    }
+
+    public int GetBananas()
+    {
+        return bananas;
     }
 }

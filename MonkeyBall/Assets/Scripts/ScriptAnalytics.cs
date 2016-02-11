@@ -32,12 +32,12 @@ public class ScriptAnalytics : MonoBehaviour {
             PlayerPrefs.SetInt("LevelFour", 0);
             PlayerPrefs.SetInt("LevelFive", 0);
 
-            Debug.Log("First Time Playing!");
+            //Debug.Log("First Time Playing!");
             PlayerPrefs.SetString("PlayedBefore", "yes");
         }
         else
         {
-            Debug.Log("You've played before! Yay.");
+            //Debug.Log("Wecome Back.");
 
         }
     }

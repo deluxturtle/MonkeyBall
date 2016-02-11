@@ -14,6 +14,7 @@ public class WinVolume : MonoBehaviour {
 
     private bool countDown = true;
     ScriptAnalytics analytic;
+    ScriptAddBanana scriptBananas;
 
 	// Use this for initialization
 	void Awake ()
@@ -27,6 +28,8 @@ public class WinVolume : MonoBehaviour {
             Debug.Log("Analytics Disabled. (Please Start Game from Main Menu.");
             analytic = null;
         }
+        scriptBananas = GameObject.Find("PanelBanana").GetComponent<ScriptAddBanana>();
+
 	}
 
     void Update()
@@ -63,6 +66,13 @@ public class WinVolume : MonoBehaviour {
     {
         if (countDown)
         {
+            int tempBananas = PlayerPrefs.GetInt("Bananas");
+            int curBananas = scriptBananas.GetBananas();
+            if(curBananas > 0)
+            {
+                PlayerPrefs.SetInt("Bananas", tempBananas + curBananas);
+            }
+
             MarkEndTime();
             victoryText.SetActive(true);
         }
